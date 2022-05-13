@@ -46,17 +46,27 @@ async function fetchPosts() {
         post => {
             let op = '';
             for (let i in post) {
-                if (!post[i].title) {
+                if (post[i] == null) {
                     op += "no posts";
                 } else {
                     op += `
-                        <p style="padding:1px">
-                            <h4>Title: ${post[i].title}</h4>
-                            <span style="font-size:10px" align="center">
-                                category: ${post[i].c_name}
-                            </span>
+                        <div class="card card-body p-4 m-1">
+                                <h4>Title: ${post[i].title}</h4>
+                                <h5>Author: ${post[i].author}</h5>
+                                <h5>
+                                    Category: ${post[i].c_name}
+                                </h5>
+                                <div class="collapse"  id="collapseExample${post[i].p_id}">
+                                    <h4>Post:</h4>
+                                    <div class="card card-body border-0 m-3">
+                                        ${post[i].body}
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-sm " style="width:fit-content" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample${post[i].p_id}" aria-expanded="false" aria-controls="collapseExample">
+                                    View Full Post
+                                </button>
 
-                        </p>
+                        </div>
                     `;
                 }
             }

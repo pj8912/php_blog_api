@@ -20,21 +20,22 @@
 
 		.box {
 			border-radius: 5px;
-			background-color: #eee;
+			background-color: whitesmoke;
 			padding: 20px 5px;
 
 		}
 
-		button {
+		/* button {
 			padding: 10px;
 			border-radius: 5px;
 			color: white;
 			background: dodgerblue;
 			border: 1px solid inherit;
 			cursor: pointer;
-		}
+		} */
 	</style>
 
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 </head>
 
@@ -43,62 +44,68 @@
 
 
 	<!-- fetchPost  -->
-	<div style="float:left; width:50%; margin:5px; padding:2px">
-		<h1> Get Posts </h1>
-		<p  id="post-box" class="box"> Post...</p>
-		<p><button id="getPost" onclick = "fetchPosts()"> Get Post </button></p>
+	<h1 class="p-4"> Get Posts </h1>
+	<div id="post-box" class="p-4" style="float:left; width:50%; margin:5px; ">
+		<!-- <p id="post-box" class=" card card-body rounded-0">  -->
+
+
+
+		<button id="getPost" class="btn btn-primary" onclick="fetchPosts()"> Get Post </button>
 	</div>
 
 
 
 	<!-- create Posts -->
-	<div style="float:right; width:40%; padding:10px">
-		<form method="POST">
-			<p class="success_div" style="color:lightgreen"></p>
+	<div class="card card-body p-5 border-0" style="float:right;  padding:10px; width:30%">
+		<h1> Create Post </h1>
+		<!-- <form method="POST"> -->
+		<p class="success_div" style="color:lightgreen"></p>
 
-			<input type="text" class="title" name="title" placeholder="Post  Title"><br><br>
+		<input type="text" class="title form-control" name="title" placeholder="Post  Title"><br><br>
 
-			<textarea name="body" class="body" cols="30" rows="10" placeholder="Post Body"></textarea><br><br>
+		<textarea name="body" class="body form-control" cols="30" rows="10" placeholder="Post Body"></textarea><br><br>
 
-			<input type="text" class="author" name="author" placeholder="Post Author"><br>
+		<input type="text" class="author form-control" name="author" placeholder="Post Author"><br>
 
-			<br>
-			<select class="cat" name="category">
-				<?php
-				require 'Database/Database.php';
-				require 'models/Category.php';
+		<br>
+		<select class="cat form-control" name="category">
+			<option class="text-center"> SELECT CATEGORY</option>
+			<?php
+			require 'Database/Database.php';
+			require 'models/Category.php';
 
-				$database  = new Database();
+			$database  = new Database();
 
-				$db = $database->connect();
+			$db = $database->connect();
 
-				$cat = new Category($db);
+			$cat = new Category($db);
 
-				$result =  $cat->getAllCategories();
+			$result =  $cat->getAllCategories();
 
-				$num = $result->rowCount();
-				if ($num > 0) {
+			$num = $result->rowCount();
+			if ($num > 0) {
 
 
-					while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+				while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 
-						echo '<option value="' . $row['c_id'] . '">' . $row['c_name'] . '</option>';
-					}
-				} else {
-
-					echo "NO categories";
+					echo '<option class="form-control" value="' . $row['c_id'] . '">' . $row['c_name'] . '</option>';
 				}
+			} else {
 
-				?>
-			</select>
+				echo "NO categories";
+			}
 
-			<br><br>
-			<button id="sendPost" type="submit" onclick="uploadMessage()"> Create Post </button>
-			<!-- </form> -->
-		</form>
+			?>
+		</select>
+
+		<br><br>
+		<button id="sendPost" class="btn btn-primary" type="submit" onclick="uploadMessage()"> Create Post </button>
+		<!-- </form> -->
 	</div>
 
 </body>
 <script src="src/main.js"></script>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </html>
