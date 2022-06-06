@@ -45,13 +45,12 @@
 
 	<!-- fetchPost  -->
 	<h1 class="p-4"> Get Posts </h1>
-	<div id="post-box" class="p-4" style="float:left; width:50%; margin:5px; ">
+	<div id="post-box" class="p-4 "  style="float:left; width:50%; margin:5px; ">
 		<!-- <p id="post-box" class=" card card-body rounded-0">  -->
 
-
-
-		<button id="getPost" class="btn btn-primary" onclick="fetchPosts()"> Get Post </button>
 	</div>
+	
+	<button id="getPost" class="btn btn-primary" onclick="fetchPosts()"> Get Post </button>
 
 
 
